@@ -6,10 +6,11 @@ using PizzaStore.Data;
 // Criando o construtor
 // Criando instancia do Aplicativo
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<PizzaDbContext>(options => options.UseInMemoryDatabase("items"));
+builder.Services.AddSqlite<PizzaDbContext>(connectionString);
 
 builder.Services.AddSwaggerGen(c =>
    {

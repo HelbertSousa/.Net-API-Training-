@@ -203,3 +203,35 @@ Como parte deste módulo, você aprendeu como adicionar Swagger. Você também a
     ```
 
 > Observação: A persistencia de dados em memória é perdido quando o aplicativo é reiniciado.
+
+## Adicionando EF Core com provedor de banco de dados SQLite ao Projeto
+
+- Terminal:
+    ```PowerShell
+    # EF Core SQLite:
+    dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+    # EF Core Toools
+    # tarefas de desenvolvimento em tempo de design
+    dotnet tool install --global dotnet-ef
+
+    # Logica de tempo de design para o EF Core
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+    ```
+- Habilitando a criacao do banco de dados:
+
+    ```cs
+    var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
+    ```
+    ```diff
+    - builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+    + builder.Services.AddSqlite<PizzaDb>(connectionString);
+    ```
+- Usando os comandos do EF Core Tools para criar Migrations:
+    ```PowerShell
+    # Primeira migration
+    dotnet ef migrations add InitialCreate
+
+    #Criando o banco de dados e o Esquema:
+    dotnet ef database update
+    ```
