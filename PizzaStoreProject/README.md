@@ -174,3 +174,32 @@ Aprimoramento progressivo: adicione recursos quando precisar deles. Até lá, o 
 Recursos mais recentes do .NET 8: use todos os recursos mais recentes do .NET 8, como instruções e registros de nível superior.
 Como parte deste módulo, você aprendeu como adicionar Swagger. Você também adicionou rotas para criar, ler, atualizar e excluir um recurso.
 >
+
+
+---------------------------------------
+
+# Entity Framework
+
+> O EF Core é uma tecnologia de acesso a dados leve, extensível, de código aberto e de plataforma cruzada para aplicativos .NET.
+> 
+> O EF Core pode servir como um mapeador relacional de objeto, que:
+> 
+> - Permite que os desenvolvedores do .NET trabalhem com um banco de dados usando objetos .NET.
+>
+> - Elimina a necessidade da maior parte do código de acesso a dados que normalmente precisa ser gravado.
+>
+> O EF Core dá suporte a um grande número de bancos de dados populares, incluindo SQLite, MySQL, PostgreSQL, Oracle e Microsoft SQL Server.
+
+## Adicionando EF Core In Memory ao Projeto
+- Terminal:
+    ```PowerShell
+    # EF Core in Memory:
+    dotnet add package Microsoft.EntityFrameworkCore.InMemory
+    ```
+
+- Código:
+    ```cs
+        builder.Services.AddDbContext<PizzaDbContext>(options => options.UseInMemoryDatabase("items"));
+    ```
+
+> Observação: A persistencia de dados em memória é perdido quando o aplicativo é reiniciado.
